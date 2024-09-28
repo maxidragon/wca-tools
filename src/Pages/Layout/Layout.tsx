@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = () => {
     return (
@@ -9,13 +10,14 @@ const Layout = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                minHeight: "100vh",
                 backgroundColor: "background.paper",
                 color: "white",
+                minHeight: "100vh",
             }}
         >
             <Header />
             <Outlet />
+            <Footer />
         </Box>
     );
 };

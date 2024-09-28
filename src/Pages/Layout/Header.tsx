@@ -1,5 +1,4 @@
-import { GitHub, Login } from "@mui/icons-material";
-import { AppBar, Box, IconButton, Link, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import LoginPartial from "./LoginPartial";
 
@@ -26,10 +25,7 @@ const Header = () => {
                     wca-tools
                 </Typography>
                 <Box sx={{ display: "flex", gap: 2 }}>
-                <LoginPartial />
-                <IconButton component={Link} href="https://github.com/maxidragon/wca-tools" rel="noopener noreferrer">
-                    <GitHub fontSize="large" />
-                </IconButton>
+                    <LoginPartial />
                 </Box>
             </Toolbar>
         </AppBar>
