@@ -1,9 +1,11 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { RouterProvider, createHashRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import Layout from './Pages/Layout/Layout';
 import { SnackbarProvider } from 'notistack';
 import Home from './Pages/Home/Home';
+import Panel from './Pages/Panel/Panel';
+import SignIn from './Pages/SignIn/SignIn';
 
 const darkTheme = createTheme({
   palette: {
@@ -12,7 +14,7 @@ const darkTheme = createTheme({
 });
 
 const App = () => {
-  const router = createHashRouter([
+  const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
@@ -20,6 +22,14 @@ const App = () => {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/sign-in",
+          element: <SignIn />,
+        },
+        {
+          path: "/panel",
+          element: <Panel />,
         }
       ],
     }

@@ -6,35 +6,29 @@ export const USER_INFO_NAME = "wca-tools-user-info";
 export const EXPIRES_IN_KEY = "wca-tools-expires-in";
 
 export const initializeAuth = () => {
-  const hash = window.location.hash.replace(/^#/, "");
-  const hashParams = new URLSearchParams(hash);
-  const token = hashParams.get("access_token");
-  if (token) {
-    localStorage.setItem(TOKEN_NAME, token);
-  }
-  if (hashParams.has("expires_in")) {
-    const expiresIn = hashParams.get("expires_in") || 0;
-
-    const expiresInSeconds = +expiresIn - 15 * 60;
-    const expirationTime = new Date(
-      new Date().getTime() + expiresInSeconds * 1000
-    );
-    localStorage.setItem(EXPIRES_IN_KEY, expirationTime.toISOString());
-  }
   const expirationTime = localStorage.getItem(EXPIRES_IN_KEY);
   if (expirationTime && new Date() >= new Date(expirationTime)) {
     logout();
   }
-  getMe();
-  if (hashParams.has("access_token")) {
-    window.location.hash = "";
-  }
+};
+
+export const signIn = async (token: string, expiresIn: number) => {
+  localStorage.setItem(TOKEN_NAME, token);
+
+  const expiresInSeconds = +expiresIn - 15 * 60;
+  const expirationTime = new Date(
+    new Date().getTime() + expiresInSeconds * 1000
+  );
+  localStorage.setItem(EXPIRES_IN_KEY, expirationTime.toISOString());
+  const user = await getMe();
+  return user;
 };
 
 export const getMe = async () => {
   const response = await wcaApiRequest("me");
   const data = await response.json();
   localStorage.setItem(USER_INFO_NAME, JSON.stringify(data));
+  return data ? true : false;
 };
 
 export const getToken = () => {

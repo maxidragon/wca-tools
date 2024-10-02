@@ -1,5 +1,5 @@
 import { Logout } from "@mui/icons-material";
-import { Tooltip, IconButton, Avatar, Menu, MenuItem, ListItemIcon, Typography, Box } from "@mui/material";
+import { Tooltip, IconButton, Avatar, Menu, MenuItem, ListItemIcon, Typography, Box, Divider } from "@mui/material";
 import { useState } from "react";
 import { logout } from "../../logic/auth";
 import { useNavigate } from "react-router-dom";
@@ -29,8 +29,7 @@ const AccountMenu = ({ user }: AccountMenuProps) => {
     if (!user.me) return null;
 
     return (
-        <Box sx={{ alignItems: "center", display: "flex"}}>
-            <Typography variant="body2" sx={{ ml: 2 }}>Hi {user.me.name}</Typography>
+        <Box sx={{ alignItems: "center", display: "flex" }}>
             <Tooltip title="Account settings">
                 <IconButton
                     onClick={handleClick}
@@ -80,6 +79,10 @@ const AccountMenu = ({ user }: AccountMenuProps) => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
+                <Typography sx={{ p: 2 }} variant="subtitle2" color="textSecondary">
+                    {user.me.name}
+                </Typography>
+                <Divider />
                 <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />

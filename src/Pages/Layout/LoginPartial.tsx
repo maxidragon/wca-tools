@@ -1,32 +1,13 @@
 import { Login } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { WCA_ORIGIN } from "../../logic/request";
-import { WCA_CLIENT_ID, getUserInfo, isUserLoggedIn } from "../../logic/auth";
+import { getUserInfo, isUserLoggedIn } from "../../logic/auth";
 import AccountMenu from "./AccountMenu";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPartial = () => {
-  const [userLoggedIn, setLoggedIn] = useState(isUserLoggedIn());
-  const [user, setUser] = useState(getUserInfo());
-
-  useEffect(() => {
-    const handleStorage = () => {
-        setUser(getUserInfo());
-        setLoggedIn(isUserLoggedIn());
-    };
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-}, []);
-
-  const handleLogin = () => {
-    const queryParams = new URLSearchParams({
-      redirect_uri: `${window.location.origin}`,
-      scope: "public manage_competitions",
-      response_type: "token",
-      client_id: WCA_CLIENT_ID,
-    });
-    window.location.href = `${WCA_ORIGIN}/oauth/authorize?${queryParams.toString()}`;
-  };
+  const navigate = useNavigate();
+  const userLoggedIn = isUserLoggedIn()
+  const user = getUserInfo();
 
   return (
     <>
@@ -36,7 +17,7 @@ const LoginPartial = () => {
         </>
       ) : (
         <>
-          <IconButton onClick={handleLogin}>
+          <IconButton onClick={() => navigate("/sign-in")}>
             <Login />
           </IconButton>
         </>
