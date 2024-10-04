@@ -1,36 +1,62 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import TabPanel from "../../Components/TabPanel";
-import { isUserLoggedIn } from "../../logic/auth";
-import { useNavigate } from "react-router-dom";
+import { WCACompetition } from "../../logic/interface";
+import { getUpcomingManageableCompetitions, searchCompetitions } from "../../logic/competitions";
+import CompetitionsList from "./Components/CompetitionsList";
 
-const Panel = () => {
-    const navigate = useNavigate();
-    const [value, setValue] = useState<number>(1);
-    const isLoggedIn = isUserLoggedIn();
-    const handleChange = (_: React.SyntheticEvent, newValue: string) => {
-        setValue(+newValue);
+const MyCompetitions = () => {
+    const [searchText, setSearchText] = useState<string>("");
+    const [manageableCompetitions, setManageableCompetitions] = useState<WCACompetition[]>([]);
+    const [searchedCompetitions, setSearchedCompetitions] = useState<WCACompetition[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsSearchLoading(true);
+        setSearchText(e.target.value);
+        if (e.target.value.length < 1) {
+            setSearchedCompetitions([]);
+            return;
+        }
+        searchCompetitions(e.target.value).then((competitions) => {
+            setSearchedCompetitions(competitions);
+            setIsSearchLoading(false);
+        });
     };
 
     useEffect(() => {
-        if (!isLoggedIn) {
-            navigate("/");
-        }
-    }, [isLoggedIn, navigate]);
+        getUpcomingManageableCompetitions().then((competitions) => {
+            setManageableCompetitions(competitions);
+            setIsLoading(false);
+        });
+    }, []);
+
     return (
-        <>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Item One" value={1} />
-                    <Tab label="Item Two" value={2} />
-                    <Tab label="Item Three" value={3} />
-                </Tabs>
-            </Box>
-            <TabPanel value={value} index={1}></TabPanel>
-            <TabPanel value={value} index={2}></TabPanel>
-            <TabPanel value={value} index={3}></TabPanel>
-        </>
+        <Box
+            sx={{
+                py: { xs: 2, md: 3 },
+                px: { xs: 1, md: 3 },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: 2,
+            }}
+        >
+            <Typography variant="h4">Upcoming managable competitions</Typography>
+            <CompetitionsList competitions={manageableCompetitions} isLoading={isLoading} />
+            <Typography variant="h5" sx={{ marginBottom: "0.2em" }}>
+                Search for competition
+            </Typography>
+            <TextField
+                id="outlined-basic"
+                label="Search"
+                variant="outlined"
+                onChange={handleSearch}
+                value={searchText}
+            />
+            <CompetitionsList competitions={searchedCompetitions} isLoading={isSearchLoading} />
+        </Box>
     );
 };
 
-export default Panel;
+export default MyCompetitions;

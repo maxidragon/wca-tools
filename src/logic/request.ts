@@ -1,6 +1,7 @@
 import { getToken } from "./auth";
 
-export const WCA_ORIGIN = "https://www.worldcubeassociation.org";
+//export const WCA_ORIGIN = "https://www.worldcubeassociation.org";
+export const WCA_ORIGIN = "https://staging.worldcubeassociation.org";
 
 export const wcaApiRequest = (
   path: string,

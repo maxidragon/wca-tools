@@ -6,6 +6,8 @@ import { SnackbarProvider } from 'notistack';
 import Home from './Pages/Home/Home';
 import Panel from './Pages/Panel/Panel';
 import SignIn from './Pages/SignIn/SignIn';
+import AuthenticatedLayout from './Pages/Layout/AuthenticatedLayout';
+import MyCompetitions from './Pages/Panel/Panel';
 
 const darkTheme = createTheme({
   palette: {
@@ -27,10 +29,16 @@ const App = () => {
           path: "/sign-in",
           element: <SignIn />,
         },
+      ],
+    },
+    {
+      path: "/panel",
+      element: <AuthenticatedLayout />,
+      children: [
         {
           path: "/panel",
-          element: <Panel />,
-        }
+          element: <MyCompetitions />,
+        },
       ],
     }
   ]);

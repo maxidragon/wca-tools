@@ -1,6 +1,7 @@
 import { wcaApiRequest } from "./request";
 
-export const WCA_CLIENT_ID = "I1qih_LhOOv0h-y_-Mx7xPlaVmNO3mGbRGkRoUwnoaE";
+//export const WCA_CLIENT_ID = "I1qih_LhOOv0h-y_-Mx7xPlaVmNO3mGbRGkRoUwnoaE";
+export const WCA_CLIENT_ID = "example-application-id";
 export const TOKEN_NAME = "wca-tools-token";
 export const USER_INFO_NAME = "wca-tools-user-info";
 export const EXPIRES_IN_KEY = "wca-tools-expires-in";
