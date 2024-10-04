@@ -1,4 +1,5 @@
 import {
+    Avatar,
     LinearProgress,
     List,
     ListItemButton,
@@ -7,47 +8,44 @@ import {
     Paper,
     Typography,
 } from "@mui/material";
-import { WCACompetition } from "../../../logic/interface";
-import CompetitionFlagIcon from "../../../Components/CompetitionFlagIcon";
+import { WCAPerson } from "../../../logic/interface";
 import { Link } from "react-router-dom";
 
-interface CompetitionsListProps {
-    competitions: WCACompetition[];
+interface PersonsListProps {
+    persons: WCAPerson[];
     isLoading: boolean;
 }
 
-const CompetitionsList = ({ competitions, isLoading }: CompetitionsListProps) => {
-    return (
 
+const PersonsList = ({ persons, isLoading }: PersonsListProps) => {
+    return (
         <Paper>
             {isLoading && <LinearProgress />}
-            {competitions.length > 0 ? (
+            {persons.length > 0 ? (
                 <List dense={true} disablePadding>
-                    {competitions.map((competition) => (
+                    {persons.map((person) => (
                         <ListItemButton
-                            key={competition.id}
+                            key={person.wcaId}
                             component={Link}
-                            to={`/panel/competitions/${competition.id}`
+                            to={`/panel/persons/${person.wcaId}`
                             }
                         >
                             <ListItemIcon>
                                 <ListItemIcon sx={{ p: 2 }}>
-                                    <CompetitionFlagIcon
-                                        country={competition.country_iso2}
-                                    />
+                                    <Avatar src={person.avatarUrl} />
                                 </ListItemIcon>
                             </ListItemIcon>
-                            <ListItemText primary={competition.name} />
+                            <ListItemText primary={person.name} />
                         </ListItemButton>
                     ))}
                 </List>
             ) : !isLoading && (
                 <Typography variant="body1" sx={{ p: 2 }}>
-                    No competitions found
+                    No users found
                 </Typography>
             )}
         </Paper>
     );
 };
 
-export default CompetitionsList;
+export default PersonsList;

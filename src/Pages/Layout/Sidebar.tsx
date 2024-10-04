@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Box, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import PersonSearch from "@mui/icons-material/PersonSearch";
 
 const Sidebar = () => {
     return (
@@ -15,7 +16,12 @@ const Sidebar = () => {
                     </ListItemIcon>
                     <ListItemText primary="My competitions" />
                 </ListItemButton>
-         
+                <ListItemButton component={Link} to={"/panel/persons"}>
+                    <ListItemIcon>
+                        <PersonSearch />
+                    </ListItemIcon>
+                    <ListItemText primary="Persons" />
+                </ListItemButton>
             </List>
         </Box>
     );

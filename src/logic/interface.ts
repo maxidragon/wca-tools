@@ -15,3 +15,9 @@ export interface WCACompetition {
     registration_open: string;
     start_date: string;
 }
+
+export interface WCAPerson {
+    wcaId: string;
+    name: string;
+    avatarUrl: string;
+}

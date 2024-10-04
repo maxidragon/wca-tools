@@ -4,10 +4,10 @@ import { CssBaseline } from '@mui/material';
 import Layout from './Pages/Layout/Layout';
 import { SnackbarProvider } from 'notistack';
 import Home from './Pages/Home/Home';
-import Panel from './Pages/Panel/Panel';
 import SignIn from './Pages/SignIn/SignIn';
 import AuthenticatedLayout from './Pages/Layout/AuthenticatedLayout';
 import MyCompetitions from './Pages/Panel/Panel';
+import Persons from './Pages/Users/Persons';
 
 const darkTheme = createTheme({
   palette: {
@@ -39,6 +39,10 @@ const App = () => {
           path: "/panel",
           element: <MyCompetitions />,
         },
+        {
+          path: "/panel/persons",
+          element: <Persons />,
+        }
       ],
     }
   ]);
