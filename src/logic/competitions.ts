@@ -32,3 +32,10 @@ export const searchCompetitions = async (name: string) => {
         return [];
     }
 };
+
+export const formatDates = (startDate: string, endDate: string) => {
+    if (startDate === endDate) {
+        return startDate;
+    }
+    return `${startDate} - ${endDate}`;
+};

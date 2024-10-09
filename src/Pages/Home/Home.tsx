@@ -7,8 +7,8 @@ const Home = () => {
     const [isLoggedIn, setLoggedIn] = useState(isUserLoggedIn());
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoggedIn) {
-            navigate("/");
+        if (isLoggedIn) {
+            navigate("/panel");
         }
     }, [isLoggedIn, navigate]);
 

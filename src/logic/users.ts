@@ -1,3 +1,4 @@
+import { WCACompetition } from "./interface";
 import { wcaApiRequest } from "./request";
 
 export const searchPersons = async (search: string) => {
@@ -14,4 +15,15 @@ export const searchPersons = async (search: string) => {
       };
     }
   );
+};
+
+export const getUser = async (wcaId: string) => {
+  const response = await wcaApiRequest(`users/${wcaId}?upcoming_competitions=true`);
+  const data = await response.json();
+  return {
+    wcaId: data.user.wca_id,
+    name: data.user.name,
+    avatarUrl: data.user.avatar.url,
+    upcomingCompetitions: data.upcoming_competitions.sort((a: WCACompetition, b: WCACompetition) => a.start_date.localeCompare(b.start_date)),
+  }
 };

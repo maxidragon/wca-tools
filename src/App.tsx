@@ -7,7 +7,8 @@ import Home from './Pages/Home/Home';
 import SignIn from './Pages/SignIn/SignIn';
 import AuthenticatedLayout from './Pages/Layout/AuthenticatedLayout';
 import MyCompetitions from './Pages/Panel/Panel';
-import Persons from './Pages/Users/Persons';
+import Persons from './Pages/Persons/Persons';
+import PersonPage from './Pages/Persons/PersonPage/PersonPage';
 
 const darkTheme = createTheme({
   palette: {
@@ -42,6 +43,10 @@ const App = () => {
         {
           path: "/panel/persons",
           element: <Persons />,
+        },
+        {
+          path: "/panel/persons/:id",
+          element: <PersonPage />,
         }
       ],
     }

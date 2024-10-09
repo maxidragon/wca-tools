@@ -2,7 +2,7 @@ import { Box, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { WCACompetition } from "../../logic/interface";
 import { getUpcomingManageableCompetitions, searchCompetitions } from "../../logic/competitions";
-import CompetitionsList from "./Components/CompetitionsList";
+import CompetitionsList from "../../Components/CompetitionsList";
 
 const MyCompetitions = () => {
     const [searchText, setSearchText] = useState<string>("");

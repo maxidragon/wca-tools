@@ -14,10 +14,12 @@ export interface WCACompetition {
     country_iso2: string;
     registration_open: string;
     start_date: string;
+    end_date: string;
 }
 
 export interface WCAPerson {
     wcaId: string;
     name: string;
     avatarUrl: string;
+    upcomingCompetitions?: WCACompetition[];
 }
