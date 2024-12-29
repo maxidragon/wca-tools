@@ -1,8 +1,12 @@
 import { wcaApiRequest } from "./request";
 
-export const DEV_WCA_CLIENT_ID = import.meta.env.VITE_DEV_WCA_CLIENT_ID ? import.meta.env.VITE_DEV_WCA_CLIENT_ID : "example-application-id";
+export const DEV_WCA_CLIENT_ID = import.meta.env.VITE_DEV_WCA_CLIENT_ID
+  ? import.meta.env.VITE_DEV_WCA_CLIENT_ID
+  : "example-application-id";
 export const PROD_WCA_CLIENT_ID = "I1qih_LhOOv0h-y_-Mx7xPlaVmNO3mGbRGkRoUwnoaE";
-export const WCA_CLIENT_ID = import.meta.env.PROD ? PROD_WCA_CLIENT_ID : DEV_WCA_CLIENT_ID;
+export const WCA_CLIENT_ID = import.meta.env.PROD
+  ? PROD_WCA_CLIENT_ID
+  : DEV_WCA_CLIENT_ID;
 
 export const TOKEN_NAME = "wca-tools-token";
 export const USER_INFO_NAME = "wca-tools-user-info";
@@ -16,19 +20,19 @@ export const initializeAuth = () => {
 };
 
 export const signIn = async (token: string, expiresIn: number) => {
+  const user = await getMe(token);
   localStorage.setItem(TOKEN_NAME, token);
-
+  
   const expiresInSeconds = +expiresIn - 15 * 60;
   const expirationTime = new Date(
     new Date().getTime() + expiresInSeconds * 1000
   );
   localStorage.setItem(EXPIRES_IN_KEY, expirationTime.toISOString());
-  const user = await getMe();
   return user;
 };
 
-export const getMe = async () => {
-  const response = await wcaApiRequest("me");
+export const getMe = async (token: string) => {
+  const response = await wcaApiRequest("me", "GET", true, undefined, token);
   const data = await response.json();
   localStorage.setItem(USER_INFO_NAME, JSON.stringify(data));
   return data ? true : false;
