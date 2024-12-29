@@ -9,11 +9,23 @@ import AuthenticatedLayout from './Pages/Layout/AuthenticatedLayout';
 import MyCompetitions from './Pages/Panel/Panel';
 import Persons from './Pages/Persons/Persons';
 import PersonPage from './Pages/Persons/PersonPage/PersonPage';
+import Competition from './Pages/Competition/Competition';
+import Competitors from './Pages/Competition/Competitors';
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#42A5F5"
+        },
+      },
+    },
+  },
+
 });
 
 const App = () => {
@@ -47,6 +59,14 @@ const App = () => {
         {
           path: "/panel/persons/:id",
           element: <PersonPage />,
+        },
+        {
+          path: "/panel/competitions/:id",
+          element: <Competition />,
+        },
+        {
+          path: "/panel/competitions/:id/competitors",
+          element: <Competitors />,
         }
       ],
     }

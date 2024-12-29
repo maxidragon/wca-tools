@@ -39,3 +39,13 @@ export const formatDates = (startDate: string, endDate: string) => {
     }
     return `${startDate} - ${endDate}`;
 };
+
+export const getCompetitionWcif = async (competitionId: string) => {
+    const response = await wcaApiRequest(`competitions/${competitionId}/wcif`);
+    return await response.json();
+};
+
+export const getCompetitionBasicInfo = async (competitionId: string) => {
+    const response = await wcaApiRequest(`competitions/${competitionId}`);
+    return await response.json();
+};

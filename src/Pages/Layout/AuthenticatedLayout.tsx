@@ -17,7 +17,7 @@ const AuthenticatedLayout = () => {
 
     useEffect(() => {
         if (!userLoggedIn) {
-            navigate("/auth/login");
+            navigate("/sign-in");
         }
     }, [userLoggedIn, navigate]);
 
@@ -42,6 +42,8 @@ const AuthenticatedLayout = () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
+    if (!user || !userLoggedIn) return null;
 
     return (
         <Box sx={{ display: "flex" }}>

@@ -1,10 +1,13 @@
 export interface UserInfo {
     me: {
         name: string;
-        avatar: {
-            thumb_url: string;
-        };
+        avatar: Avatar;
     };
+}
+
+export interface Avatar {
+    url: string;
+    thumb_url: string;
 }
 
 export interface WCACompetition {
@@ -15,6 +18,16 @@ export interface WCACompetition {
     registration_open: string;
     start_date: string;
     end_date: string;
+    delegates: Delegate[];
+}
+
+export interface Delegate {
+    id: number;
+    wca_id: string;
+    name: string;
+    url: string;
+    email: string;
+    avatar: Avatar;
 }
 
 export interface WCAPerson {

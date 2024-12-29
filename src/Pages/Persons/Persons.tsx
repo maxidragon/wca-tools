@@ -2,7 +2,7 @@ import { Box, Typography, TextField, Button } from "@mui/material";
 import { searchPersons } from "../../logic/users";
 import { WCAPerson } from "../../logic/interface";
 import { useState } from "react";
-import PersonsList from "./Components/UsersList";
+import PersonsList from "./Components/PersonsList";
 import { useNavigate } from "react-router-dom";
 
 const Persons = () => {
