@@ -11,6 +11,7 @@ import Persons from './Pages/Persons/Persons';
 import PersonPage from './Pages/Persons/PersonPage/PersonPage';
 import Competition from './Pages/Competition/Competition';
 import Competitors from './Pages/Competition/Competitors';
+import AssignmentsCounter from './Pages/Competition/AssignmentsCounter';
 
 const darkTheme = createTheme({
   palette: {
@@ -67,6 +68,10 @@ const App = () => {
         {
           path: "/panel/competitions/:id/competitors",
           element: <Competitors />,
+        },
+        {
+          path: "/panel/competitions/:id/assignments",
+          element: <AssignmentsCounter />,
         }
       ],
     }

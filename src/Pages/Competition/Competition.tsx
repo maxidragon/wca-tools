@@ -34,11 +34,18 @@ const Competition = () => {
             <Typography variant="h5" sx={{ marginBottom: "0.2em" }}>
                 {basicInfo.name} ({basicInfo.id})
             </Typography>
-            <Button variant="contained" sx={{
-                width: "fit-content",
-            }} component={Link} to={`/panel/competitions/${id}/competitors`}>
-                Competitors
-            </Button>
+            <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2 }}>
+                <Button variant="contained" sx={{
+                    width: "fit-content",
+                }} component={Link} to={`/panel/competitions/${id}/competitors`}>
+                    Competitors
+                </Button>
+                <Button variant="contained" sx={{
+                    width: "fit-content",
+                }} component={Link} to={`/panel/competitions/${id}/assignments`}>
+                    Assignments counter
+                </Button>
+            </Box>
             <Typography variant="h6">
                 Delegates
             </Typography>
