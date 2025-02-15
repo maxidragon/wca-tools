@@ -37,41 +37,39 @@ const AssignmentsCounter = () => {
     })).sort((a, b) => (b.count || 0) - (a.count || 0));
 
     return (
-        <Box sx={{ width: "100vh", overflowX: "auto" }}>
-            <Paper>
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Competitor</TableCell>
-                                <TableCell>Assignments</TableCell>
-                                <TableCell>Roles</TableCell>
+        <Paper>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Competitor</TableCell>
+                            <TableCell>Assignments</TableCell>
+                            <TableCell>Roles</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {transformedPersons.map((person) => (
+                            <TableRow key={person.registrantId}>
+                                <TableCell>
+                                    <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                                        <Avatar src={person.avatar?.thumbUrl} />
+                                        {person.name}
+                                    </Box>
+                                </TableCell>
+                                <TableCell>{person.count}</TableCell>
+                                <TableCell>
+                                    <Box sx={{ display: "flex", gap: 1, flexDirection: { xs: "column", sm: "row" } }}>
+                                        {person.roles?.map((role) => (
+                                            <Chip key={role} label={wcifRoleName(role)} color={wcifRoleColor(role) as never} />
+                                        ))}
+                                    </Box>
+                                </TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {transformedPersons.map((person) => (
-                                <TableRow key={person.registrantId}>
-                                    <TableCell>
-                                        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                                            <Avatar src={person.avatar?.thumbUrl} />
-                                            {person.name}
-                                        </Box>
-                                    </TableCell>
-                                    <TableCell>{person.count}</TableCell>
-                                    <TableCell>
-                                        <Box sx={{ display: "flex", gap: 1 }}>
-                                            {person.roles?.map((role) => (
-                                                <Chip key={role} label={wcifRoleName(role)} color={wcifRoleColor(role) as never} />
-                                            ))}
-                                        </Box>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-        </Box >
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper>
     );
 };
 
