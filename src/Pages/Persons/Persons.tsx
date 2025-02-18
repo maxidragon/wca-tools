@@ -41,6 +41,7 @@ const Persons = () => {
                 label="ID"
                 variant="outlined"
                 onChange={(e) => setId(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && navigate(`/panel/persons/${id}`)}
                 value={id}
             />
             <Button onClick={() => navigate(`/panel/persons/${id}`)} variant="contained">Go</Button>

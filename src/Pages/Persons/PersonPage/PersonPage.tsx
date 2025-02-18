@@ -1,10 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { WCAPerson } from "../../../logic/interface";
 import { getUser } from "../../../logic/users";
 import CompetitionsList from "../../../Components/CompetitionsList";
 import Loading from "../../../Components/Loading";
+import { WCA_ORIGIN } from "../../../logic/request";
 
 const PersonPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -31,7 +32,13 @@ const PersonPage = () => {
             }}
         >
             <Typography variant="h5" sx={{ marginBottom: "0.2em" }}>
-                {person.name} ({person.wcaId})
+                {person.name} {person.wcaId && (
+                    <>
+                        (
+                        <Link target="_blank" href={`${WCA_ORIGIN}/persons/${person.wcaId}`}>{person.wcaId}</Link>
+                        )
+                    </>
+                )}
             </Typography>
             <Typography variant="h6">
                 Upcoming competitions

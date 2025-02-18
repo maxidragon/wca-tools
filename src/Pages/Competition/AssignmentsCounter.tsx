@@ -2,6 +2,7 @@ import {
     Avatar,
     Box,
     Chip,
+    Link,
     Paper,
     Table,
     TableBody,
@@ -16,6 +17,7 @@ import Loading from "../../Components/Loading";
 import { getCompetitionWcif } from "../../logic/competitions";
 import { Competition as WCIF } from "@wca/helpers";
 import { wcifRoleColor, wcifRoleName } from "../../logic/utils";
+import { WCA_ORIGIN } from "../../logic/request";
 
 const AssignmentsCounter = () => {
     const { id } = useParams<{ id: string }>();
@@ -53,7 +55,11 @@ const AssignmentsCounter = () => {
                                 <TableCell>
                                     <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                                         <Avatar src={person.avatar?.thumbUrl} />
-                                        {person.name}
+                                        {person.wcaId ? (
+                                            <Link href={`${WCA_ORIGIN}/persons/${person.wcaId}`} target="_blank">
+                                                {person.name}
+                                            </Link>
+                                        ) : person.name}
                                     </Box>
                                 </TableCell>
                                 <TableCell>{person.count}</TableCell>
