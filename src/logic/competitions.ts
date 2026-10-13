@@ -1,3 +1,4 @@
+import { Competition } from "@wca/helpers";
 import { WCACompetition } from "./interface";
 import { wcaApiRequest } from "./request";
 
@@ -40,8 +41,16 @@ export const formatDates = (startDate: string, endDate: string) => {
     return `${startDate} - ${endDate}`;
 };
 
-export const getCompetitionWcif = async (competitionId: string) => {
-    const response = await wcaApiRequest(`competitions/${competitionId}/wcif`);
+// @wca/helpers still models WCIF v1 (e.g. Round.advancementCondition), so only
+// the parts of it that are unchanged in WCIF v2 are used here.
+export type Wcif = Pick<Competition, "formatVersion" | "id" | "name" | "persons">;
+
+export const getCompetitionWcif = async (competitionId: string): Promise<Wcif> => {
+    // Pinned to major version 2: the unversioned and `latest` endpoints follow new majors.
+    const response = await wcaApiRequest(`competitions/${competitionId}/wcif/version/2`);
+    if (!response.ok) {
+        throw new Error(`Fetching WCIF for ${competitionId} failed with status ${response.status}`);
+    }
     return await response.json();
 };
 

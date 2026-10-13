@@ -14,15 +14,14 @@ import {
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../Components/Loading";
-import { getCompetitionWcif } from "../../logic/competitions";
-import { Competition as WCIF } from "@wca/helpers";
+import { getCompetitionWcif, Wcif } from "../../logic/competitions";
 import { wcifRoleColor, wcifRoleName } from "../../logic/utils";
 import { WCA_ORIGIN } from "../../logic/request";
 
 const AssignmentsCounter = () => {
     const { id } = useParams<{ id: string }>();
 
-    const [wcif, setWcif] = useState<WCIF | null>(null);
+    const [wcif, setWcif] = useState<Wcif | null>(null);
 
     useEffect(() => {
         if (!id) return;
